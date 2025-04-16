@@ -1,38 +1,81 @@
-# sv
+# Anime Tracker
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Uma aplicação moderna para rastreamento e organização da sua lista de animes. Acompanhe seus animes favoritos, registre seu progresso, e receba notificações personalizadas.
 
-## Creating a project
+## Características
 
-If you're seeing this, you've probably already done this step. Congrats!
+- 📊 Dashboard com estatísticas e visualizações
+- 📝 Diário de animes com status personalizáveis
+- 🔍 Busca de animes com interface moderna
+- 🏆 Sistema de conquistas
+- 🔔 Notificações push para lembretes
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Tecnologias
 
-# create a new project in my-app
-npx sv create my-app
-```
+- [SvelteKit](https://kit.svelte.dev/) - Framework web
+- [Svelte 5 (Runes)](https://svelte.dev/) - Interface reativa
+- [Tailwind CSS](https://tailwindcss.com/) - Estilização
+- [Drizzle ORM](https://orm.drizzle.team/) - ORM para banco de dados
+- [SQLite](https://www.sqlite.org/) - Banco de dados
+- [Web Push](https://www.npmjs.com/package/web-push) - Notificações push
 
-## Developing
+## Configuração e Execução
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Pré-requisitos
 
-```bash
-npm run dev
+- [Node.js](https://nodejs.org/) (v18 ou superior)
+- [Bun](https://bun.sh/) (para execução rápida)
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+### Instalação
 
-## Building
+1. Clone o repositório
+   ```bash
+   git clone https://github.com/seu-usuario/anime-tracker.git
+   cd anime-tracker
+   ```
 
-To create a production version of your app:
+2. Instale as dependências
+   ```bash
+   bun install
+   ```
 
-```bash
-npm run build
-```
+3. Gere as chaves VAPID para notificações push
+   ```bash
+   npx web-push generate-vapid-keys
+   ```
+   > **Nota**: Este comando deve ser executado com `npx`, não com `bunx`.
 
-You can preview the production build with `npm run preview`.
+4. Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+   ```
+   DATABASE_URL=file:local.db
+   VITE_VAPID_PUBLIC_KEY=SuaChavePublicaGerada
+   VITE_VAPID_PRIVATE_KEY=SuaChavePrivadaGerada
+   ```
+   Substitua `SuaChavePublicaGerada` e `SuaChavePrivadaGerada` pelas chaves geradas no passo anterior.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+5. Inicialize o banco de dados
+   ```bash
+   bun run db:push
+   ```
+
+6. Inicie o servidor de desenvolvimento
+   ```bash
+   bun run dev
+   ```
+
+7. Acesse a aplicação em [http://localhost:5173](http://localhost:5173)
+
+## Scripts Disponíveis
+
+- `bun run dev` - Inicia o servidor de desenvolvimento
+- `bun run build` - Cria a versão de produção
+- `bun run preview` - Visualiza a versão de produção localmente
+- `bun run db:push` - Aplica as migrações ao banco de dados
+
+## Contribuição
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT.
